@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-const url = "https://taskmanager-stamurai-server-1.onrender.com";
+// const url = "https://taskmanager-stamurai-server-1.onrender.com";
+const url = "http://localhost:8000";
 
 // 🔐 Login User
 export const loginUser = createAsyncThunk(

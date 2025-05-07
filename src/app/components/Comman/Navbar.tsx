@@ -6,10 +6,8 @@ import { useRouter } from "next/navigation";
 import { MdGridView } from "react-icons/md";
 import { RiListView } from "react-icons/ri";
 import { BiSearchAlt } from "react-icons/bi";
-import logo from "../../../../public/logomark.svg";
-import { useState } from "react";
-import { AppDispatch, RootState } from "@/lib/store";
-import { filterSearch } from "@/lib/slices/taskSlice";
+import { AppDispatch } from "@/lib/store";
+import { filterSearch, filterSearchUser } from "@/lib/slices/taskSlice";
 const Navbar = ({ handleClick, setView, view }: any) => {
   const dispatch = useDispatch<AppDispatch>(); // Typing the dispatch function
   const router = useRouter();
@@ -76,7 +74,11 @@ const Navbar = ({ handleClick, setView, view }: any) => {
             className="outline-none"
             onChange={(e) => {
               const value = e.target.value;
-              dispatch(filterSearch(value));
+              if (localStorage.getItem("role") === "user") {
+                dispatch(filterSearchUser(value));
+              } else {
+                dispatch(filterSearch(value));
+              }
             }}
           />
 

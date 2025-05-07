@@ -15,6 +15,8 @@ interface TodoData {
   assignedTo: string;
 }
 const url = "https://taskmanager-stamurai-server-1.onrender.com";
+// const url = "http://localhost:8000";
+
 // export const getMyTasks = createAsyncThunk(
 //   "todo/getMyTasks",
 //   async (_N_E_STYLE_LOAD, { rejectWithValue }) => {
@@ -259,7 +261,7 @@ export const readAssignTasks = createAsyncThunk(
     try {
       const token = localStorage.getItem("tm-token");
       console.log("hello you callll me");
-      const response = await fetch(`{$url/todo/readAssignTask`, {
+      const response = await fetch(`${url}/todo/readAssignTask`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

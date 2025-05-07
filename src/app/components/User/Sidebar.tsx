@@ -3,6 +3,10 @@ import {
   filterImportantData,
   filterCompletedData,
   filterDueDateData,
+  filterTodayDataUser,
+  filterImportantDataUser,
+  filterCompletedDataUser,
+  filterDueDateDataUser,
 } from "@/lib/slices/taskSlice";
 import { AppDispatch, RootState } from "@/lib/store";
 import { readAssignTasks } from "@/lib/thunk/taskThunk";
@@ -28,16 +32,16 @@ const UserSidebar = () => {
         dispatch(readAssignTasks());
         break;
       case "TODAY":
-        dispatch(filterTodayData());
+        dispatch(filterTodayDataUser());
         break;
       case "IMPORTANT":
-        dispatch(filterImportantData());
+        dispatch(filterImportantDataUser());
         break;
       case "COMPLETED":
-        dispatch(filterCompletedData());
+        dispatch(filterCompletedDataUser());
         break;
       case "DUEDATE":
-        dispatch(filterDueDateData());
+        dispatch(filterDueDateDataUser());
         break;
       default:
         break;

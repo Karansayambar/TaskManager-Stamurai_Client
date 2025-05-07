@@ -15,10 +15,14 @@ const AdminSidebar = () => {
   const { tasks, filteredTasks, loading, error } = useSelector(
     (state: RootState) => state.task
   );
+  const role = localStorage.getItem("role");
 
   // Fetch tasks on component mount only once
   useEffect(() => {
-    dispatch(fetchAllTasks());
+    console.log("i am running");
+    if (role === "admin") {
+      dispatch(fetchAllTasks());
+    }
   }, []);
 
   // Sidebar options config
@@ -34,7 +38,10 @@ const AdminSidebar = () => {
     setIsActive(filterType);
     switch (filterType) {
       case "ALL":
-        dispatch(fetchAllTasks());
+        if (role === "admin") {
+          console.log("i an here 2");
+          dispatch(fetchAllTasks());
+        }
         break;
       case "TODAY":
         dispatch(filterTodayData());

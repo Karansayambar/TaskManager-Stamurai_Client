@@ -17,6 +17,7 @@ const TodoCard: React.FC<TodoCardProps> = ({
   handleCheckboxChange,
   changeImportanceStatus,
 }) => {
+  console.log("todoo details", todo);
   return (
     <div className="flex items-start justify-between p-5 border border-gray-300 rounded-xl cursor-pointer hover:shadow-sm transition">
       {/* Left section */}
@@ -49,6 +50,12 @@ const TodoCard: React.FC<TodoCardProps> = ({
           <div className="flex items-center gap-2">
             <strong className="text-gray-700">Priority:</strong>
             <p className="text-base text-gray-800">{todo?.priority}</p>
+          </div>
+
+          {/* Assigned By */}
+          <div className="flex items-center gap-2">
+            <strong className="text-gray-700">Assigned By:</strong>
+            <p className="text-base text-gray-800">{todo?.assignedBy?.email}</p>
           </div>
 
           {/* Due Date */}
