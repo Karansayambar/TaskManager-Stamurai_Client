@@ -1,23 +1,23 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { useRouter } from "next/navigation"; // Note: Changed from 'next/router'
+import { useRouter } from "next/navigation";
 
 const Home = () => {
   const router = useRouter();
-  const isAuthenticated = localStorage.getItem("isAuthenticated");
-  const role = localStorage.getItem("role");
-  console.log("isAuth", isAuthenticated);
 
   useEffect(() => {
-    if (isAuthenticated && role === "user") {
+    const isAuthenticated = localStorage.getItem("isAuthenticated");
+    const role = localStorage.getItem("role");
+
+    if (isAuthenticated === "true" && role === "user") {
       router.push("/UserDashboard");
-    } else if (isAuthenticated && role === "admin") {
+    } else if (isAuthenticated === "true" && role === "admin") {
       router.push("/AdminDashboard");
     } else {
       router.push("/login");
     }
-  }, [isAuthenticated, router]);
+  }, [router]);
 
   return (
     <div className="flex justify-center items-center h-screen w-screen">

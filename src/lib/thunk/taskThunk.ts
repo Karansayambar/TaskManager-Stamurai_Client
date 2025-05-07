@@ -14,7 +14,7 @@ interface TodoData {
   priority: string;
   assignedTo: string;
 }
-
+const url = "https://taskmanager-stamurai-server-1.onrender.com";
 // export const getMyTasks = createAsyncThunk(
 //   "todo/getMyTasks",
 //   async (_N_E_STYLE_LOAD, { rejectWithValue }) => {
@@ -44,7 +44,7 @@ export const fetchAllTasks = createAsyncThunk(
     try {
       const token = localStorage.getItem("tm-token");
 
-      const response = await fetch("http://localhost:8000/todo/read-todo", {
+      const response = await fetch(`${url}/todo/read-todo`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -74,7 +74,7 @@ export const createTodo = createAsyncThunk(
       console.log("step 1");
       const token = localStorage.getItem("tm-token");
 
-      const response = await fetch("http://localhost:8000/todo/create-todo", {
+      const response = await fetch(`${url}/todo/create-todo`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -103,7 +103,7 @@ export const changeIsImportant = createAsyncThunk<
 >("todo/changeImportant", async ({ todoId, status }, { rejectWithValue }) => {
   try {
     const token = localStorage.getItem("tm-token");
-    await fetch("http://localhost:8000/todo/changeImportanceStatus", {
+    await fetch(`${url}/todo/changeImportanceStatus`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -126,7 +126,7 @@ export const changeIsCompleted = createAsyncThunk(
       console.log("from change", todoId);
       const token = localStorage.getItem("tm-token");
 
-      await fetch("http://localhost:8000/todo/changeCompletedStatus", {
+      await fetch(`${url}/todo/changeCompletedStatus`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -168,7 +168,7 @@ export const updateTodo = createAsyncThunk(
         dueDate
       );
 
-      const response = await fetch("http://localhost:8000/todo/edit-todo", {
+      const response = await fetch(`${url}/todo/edit-todo`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -208,7 +208,7 @@ export const deleteTodo = createAsyncThunk(
       const token = localStorage.getItem("tm-token");
       console.log("todoId", todoId);
 
-      await fetch("http://localhost:8000/todo/delete-todo", {
+      await fetch(`${url}/todo/delete-todo`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -230,7 +230,7 @@ export const readRegisterUsers = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:8000/todo/readAllusers", {
+      const response = await fetch(`${url}/todo/readAllusers`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -259,16 +259,13 @@ export const readAssignTasks = createAsyncThunk(
     try {
       const token = localStorage.getItem("tm-token");
       console.log("hello you callll me");
-      const response = await fetch(
-        "http://localhost:8000/todo/readAssignTask",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // <--- fixed here
-          },
-        }
-      );
+      const response = await fetch(`{$url/todo/readAssignTask`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // <--- fixed here
+        },
+      });
 
       const data = await response.json();
       console.log("tasks data from readAsignTasks", data);

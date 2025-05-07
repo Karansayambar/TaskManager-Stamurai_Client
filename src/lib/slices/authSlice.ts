@@ -1,8 +1,9 @@
+"use client";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { loginUser, logoutUser, registerUser } from "../thunk/authThunk";
 
 // Read auth status from localStorage
-const authFromSession = localStorage.getItem("isAuthenticated") === "true";
+// const authFromSession = localStorage.getItem("isAuthenticated") === "true";
 
 interface AuthState {
   loading: boolean;
@@ -15,7 +16,7 @@ interface AuthState {
 const initialState: AuthState = {
   loading: false,
   error: false,
-  isAuthenticated: authFromSession,
+  isAuthenticated: false,
   user: null,
   role: null,
 };
@@ -23,7 +24,15 @@ const initialState: AuthState = {
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    setAuthFromStorage: (state) => {
+      if (typeof window !== "undefined") {
+        state.isAuthenticated =
+          localStorage.getItem("isAuthenticated") === "true";
+        state.role = localStorage.getItem("role");
+      }
+    },
+  },
   extraReducers: (builder) => {
     // 🔐 loginUser
     builder.addCase(loginUser.pending, (state) => {
@@ -71,5 +80,5 @@ export const authSlice = createSlice({
     });
   },
 });
-
+export const { setAuthFromStorage } = authSlice.actions;
 export default authSlice.reducer;

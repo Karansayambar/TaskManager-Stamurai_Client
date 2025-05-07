@@ -1,14 +1,13 @@
 import { useState } from "react";
 
-import { useSelector } from "react-redux";
-import Sidebar from "../Sidebar";
 import ListPage from "../Comman/ListPage";
 import ViewDetails from "../Comman/ViewDetails";
 import AdminSidebar from "./Sidebar";
+import { Todo } from "@/lib/types";
 
-const AdminDashboardPage = ({ sidebar, viewTask, setViewTask, view }) => {
+const AdminDashboardPage = ({ sidebar, viewTask, setViewTask, view }: any) => {
   // const theme = useSelector((state) => state.theme);
-  const [currentSelected, setCurrentSelected] = useState({});
+  const [currentSelected, setCurrentSelected] = useState<Todo | null>(null);
 
   return (
     <>

@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+const url = "https://taskmanager-stamurai-server-1.onrender.com";
 
 // 🔐 Login User
 export const loginUser = createAsyncThunk(
@@ -8,7 +9,7 @@ export const loginUser = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await fetch("http://localhost:8000/auth/login", {
+      const response = await fetch(`${url}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -44,7 +45,7 @@ export const registerUser = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await fetch("http://localhost:8000/auth/register", {
+      const response = await fetch(`${url}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -68,7 +69,7 @@ export const registerUser = createAsyncThunk(
 // 🚪 Logout User
 export const logoutUser = createAsyncThunk("auth/logoutUser", async () => {
   const token = localStorage.getItem("tm-token");
-  await fetch("http://localhost:8000/auth/logout", {
+  await fetch(`${url}/auth/logout`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
