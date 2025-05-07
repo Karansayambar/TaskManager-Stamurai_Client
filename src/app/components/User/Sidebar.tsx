@@ -5,9 +5,9 @@ import {
   filterDueDateData,
 } from "@/lib/slices/taskSlice";
 import { AppDispatch, RootState } from "@/lib/store";
-import { fetchAllTasks, readAssignTasks } from "@/lib/thunk/taskThunk";
+import { readAssignTasks } from "@/lib/thunk/taskThunk";
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import ChartComponent from "../Comman/Chart";
 
 const UserSidebar = () => {
@@ -16,7 +16,7 @@ const UserSidebar = () => {
 
   // Fetch tasks on mount
   useEffect(() => {
-    dispatch(fetchAllTasks());
+    dispatch(readAssignTasks());
     // dispatch(readAssignTasks());
   }, [dispatch]);
 

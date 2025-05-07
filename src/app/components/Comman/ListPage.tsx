@@ -338,12 +338,6 @@ const ListPage: React.FC<ListPageProps> = ({
   };
 
   useEffect(() => {
-    if (!viewTask) {
-      setCheckedTaskId(null);
-    }
-  }, [viewTask]);
-
-  useEffect(() => {
     dispatch(readRegisterUsers());
   }, [dispatch]);
 
@@ -368,8 +362,10 @@ const ListPage: React.FC<ListPageProps> = ({
     };
 
     try {
-      await dispatch(createTodo(todoData)).unwrap();
-      toast.success("Task created successfully! 🎉");
+      const data = await dispatch(createTodo(todoData)).unwrap();
+      if (data) {
+        toast.success("Task created successfully! 🎉");
+      }
 
       setTaskTitle("");
       setTaskDesc("");
@@ -382,12 +378,15 @@ const ListPage: React.FC<ListPageProps> = ({
       toast.error("Failed to create task. Please try again.");
     }
   };
+  const fetchTasks = () => {
+    dispatch(fetchAllTasks());
+  };
 
   useEffect(() => {
-    const fetchTasks = () => {
-      dispatch(fetchAllTasks());
-    };
     fetchTasks();
+    if (!viewTask) {
+      setCheckedTaskId(null);
+    }
   }, [dispatch, viewTask, isAuthenticated]);
 
   const handleCheckboxChange = (id: string, todo: Todo) => {

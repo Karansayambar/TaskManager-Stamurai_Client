@@ -17,14 +17,18 @@ const Register = () => {
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(registerUser({ email, password, username, role }));
-    router.push("/login");
+    if (!email && !username && !password && !role) {
+      return alert("all fields are required");
+    } else {
+      dispatch(registerUser({ email, password, username, role }));
+      router.push("/login");
+    }
   };
 
   return (
     <div className="h-screen w-screen flex items-center justify-center bg-gray-50">
-      <div className="border rounded-md flex bg-[#EEF6EF] space-y-8 flex-col p-8 shadow-lg">
-        <div className="px-24">
+      <div className="border w-[400px] rounded-md flex bg-[#EEF6EF] space-y-8 flex-col p-8 shadow-lg">
+        <div className="">
           <div className="flex justify-center space-x-2">
             <div className="flex justify-start">
               <svg
@@ -48,7 +52,7 @@ const Register = () => {
           </div>
         </div>
         <form
-          className="flex flex-col space-y-2 px-24"
+          className="flex flex-col space-y-2 px-4"
           onSubmit={handleRegister}
         >
           <div className="flex flex-col space-y-1 w-full">
@@ -63,7 +67,7 @@ const Register = () => {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setUsername(e.target.value)
               }
-              className="border border-slate-300 py-2 w-[300px] px-4 rounded-md"
+              className="border border-slate-300 py-2 w-full px-4 rounded-md"
             />
           </div>
           <div className="flex flex-col space-y-1 w-full">
@@ -78,7 +82,7 @@ const Register = () => {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setEmail(e.target.value)
               }
-              className="border border-slate-300 py-2 w-[300px] px-4 rounded-md"
+              className="border border-slate-300 py-2 w-full px-4 rounded-md"
             />
           </div>
           <div className="flex flex-col space-y-1">
@@ -109,10 +113,10 @@ const Register = () => {
           </div>
           <button className="hidden" type="submit"></button>
         </form>
-        <div className="px-24">
+        <div className="px-4">
           <button
             onClick={handleRegister}
-            className="py-2 px-24 flex w-[300px] cursor-pointer bg-[#3F9142] rounded-md text-white font-semibold justify-center items-center"
+            className="py-2 px-24 flex w-full cursor-pointer bg-[#3F9142] rounded-md text-white font-semibold justify-center items-center"
           >
             Register
           </button>

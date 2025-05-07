@@ -1,7 +1,6 @@
 "use client";
 
 import AdminDashboardPage from "@/app/components/Admin/DashboardPage";
-import MainPage from "@/app/components/MainPage";
 import Navbar from "@/app/components/Comman/Navbar";
 import { RootState } from "@/lib/store";
 import { useRouter } from "next/navigation";

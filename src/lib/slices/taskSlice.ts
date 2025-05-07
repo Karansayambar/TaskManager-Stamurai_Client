@@ -9,6 +9,7 @@ import {
   readRegisterUsers,
   readAssignTasks,
 } from "../thunk/taskThunk";
+import { logoutUser } from "../thunk/authThunk";
 
 // ✅ Task Type
 interface Task {
@@ -211,6 +212,17 @@ export const taskSlice = createSlice({
       .addCase(readAssignTasks.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        // reset everything to initial state
+        state.loading = false;
+        state.error = null;
+        state.activeFilter = "ALL";
+        state.tasks = [];
+        state.filteredTasks = [];
+        state.assignedTasks = [];
+        state.users = [];
+        state.currentUserId = null;
       });
   },
 });
