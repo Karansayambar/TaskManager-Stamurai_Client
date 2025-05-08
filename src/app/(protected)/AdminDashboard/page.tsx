@@ -11,18 +11,31 @@ export default function DashboardPage() {
   const [sidebar, setSidebar] = useState(true);
   const [viewTask, setViewTask] = useState(false);
   const [view, setView] = useState("List");
+  const [isClient, setIsClient] = useState(false);
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   const router = useRouter();
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    setIsClient(true); // Mark that we're on the client side
+  }, []);
+
+  useEffect(() => {
+    if (!isClient) return; // Don't run on server
+
+    // Combined auth check
+    const token = localStorage.getItem("tm-token");
+    if (!token || !isAuthenticated) {
       router.push("/login");
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, isClient, router]);
 
   const handleClick = () => {
     setSidebar(!sidebar);
   };
+
+  if (!isClient) {
+    return <div>Loading...</div>; // Or your custom loader
+  }
 
   return (
     <div className="mt-0 h-screen w-screen">
