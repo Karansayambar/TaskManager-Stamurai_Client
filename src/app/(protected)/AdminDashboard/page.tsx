@@ -15,7 +15,6 @@ export default function DashboardPage() {
   const router = useRouter();
 
   useEffect(() => {
-    console.log("i am in user dashboard");
     if (!isAuthenticated) {
       router.push("/login");
     }
