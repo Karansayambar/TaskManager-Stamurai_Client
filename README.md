@@ -65,11 +65,11 @@ user1@gmail.com
 user2@gmail.com
 user3@gmail.com
 
-password : 1234567890
+password : 123456789
 
 1 admin
 admin@gmail.com
-password : 1234567890
+password : 123456789
 
 Implemented Features
 User Roles
