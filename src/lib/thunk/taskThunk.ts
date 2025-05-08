@@ -276,10 +276,8 @@ export const readAssignTasks = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem("tm-token");
-      const url = process.env.NEXT_PUBLIC_API_URL; // Store in variable first
-      console.log("API URL:", url); // Debug log
       const response = await fetch(
-        `${url}/todo/readAssignTask`, // Use the variable
+        `${process.env.NEXT_PUBLIC_API_URL}/todo/readAssignTask`,
         {
           method: "GET",
           headers: {
