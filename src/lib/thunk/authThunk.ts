@@ -1,7 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-const url = "https://taskmanager-stamurai-server-1.onrender.com";
-// const url = "http://localhost:8000";
-// const url = "https://task-manager-stamurai-server.vercel.app";
 
 // 🔐 Login User
 export const loginUser = createAsyncThunk(
@@ -11,13 +8,17 @@ export const loginUser = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await fetch(`${url}/auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(credentials),
-      });
+      console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(credentials),
+        }
+      );
 
       const results = await response.json();
 
@@ -47,13 +48,16 @@ export const registerUser = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await fetch(`${url}/auth/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(credentials),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(credentials),
+        }
+      );
 
       const results = await response.json();
 
@@ -71,7 +75,7 @@ export const registerUser = createAsyncThunk(
 // 🚪 Logout User
 export const logoutUser = createAsyncThunk("auth/logoutUser", async () => {
   const token = localStorage.getItem("tm-token");
-  await fetch(`${url}/auth/logout`, {
+  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

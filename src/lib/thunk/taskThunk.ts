@@ -15,10 +15,6 @@ interface TodoData {
   assignedTo: string;
 }
 
-const url = "https://taskmanager-stamurai-server-1.onrender.com";
-// const url = "http://localhost:8000";
-// const url = "https://task-manager-stamurai-server.vercel.app";
-
 // export const getMyTasks = createAsyncThunk(
 //   "todo/getMyTasks",
 //   async (_N_E_STYLE_LOAD, { rejectWithValue }) => {
@@ -48,13 +44,16 @@ export const fetchAllTasks = createAsyncThunk(
     try {
       const token = localStorage.getItem("tm-token");
 
-      const response = await fetch(`${url}/todo/read-todo`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/todo/read-todo`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const data = await response.json();
       console.log("tasks", data);
@@ -78,14 +77,17 @@ export const createTodo = createAsyncThunk(
       console.log("step 1");
       const token = localStorage.getItem("tm-token");
 
-      const response = await fetch(`${url}/todo/create-todo`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(todoData),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/todo/create-todo`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(todoData),
+        }
+      );
 
       const data = await response.json();
 
@@ -107,14 +109,17 @@ export const changeIsImportant = createAsyncThunk<
 >("todo/changeImportant", async ({ todoId, status }, { rejectWithValue }) => {
   try {
     const token = localStorage.getItem("tm-token");
-    await fetch(`${url}/todo/changeImportanceStatus`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ todoId, status: !status }),
-    });
+    await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/todo/changeImportanceStatus`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ todoId, status: !status }),
+      }
+    );
 
     return { todoId, status: !status };
   } catch (error: any) {
@@ -130,14 +135,17 @@ export const changeIsCompleted = createAsyncThunk(
       console.log("from change", todoId);
       const token = localStorage.getItem("tm-token");
 
-      await fetch(`${url}/todo/changeCompletedStatus`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ todoId }),
-      });
+      await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/todo/changeCompletedStatus`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ todoId }),
+        }
+      );
 
       return todoId;
     } catch (error: any) {
@@ -172,19 +180,22 @@ export const updateTodo = createAsyncThunk(
         dueDate
       );
 
-      const response = await fetch(`${url}/todo/edit-todo`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          todoId,
-          taskTitle,
-          taskDesc,
-          dueDate: dueDate ? dueDate.toISOString() : null, // Convert Date to string
-        }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/todo/edit-todo`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            todoId,
+            taskTitle,
+            taskDesc,
+            dueDate: dueDate ? dueDate.toISOString() : null, // Convert Date to string
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -212,7 +223,7 @@ export const deleteTodo = createAsyncThunk(
       const token = localStorage.getItem("tm-token");
       console.log("todoId", todoId);
 
-      await fetch(`${url}/todo/delete-todo`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/todo/delete-todo`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -234,13 +245,16 @@ export const readRegisterUsers = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch(`${url}/todo/readAllusers`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/todo/readAllusers`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       const data = await response.json();
 
@@ -263,13 +277,16 @@ export const readAssignTasks = createAsyncThunk(
     try {
       const token = localStorage.getItem("tm-token");
       console.log("hello you callll me");
-      const response = await fetch(`${url}/todo/readAssignTask`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // <--- fixed here
-        },
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/todo/readAssignTask`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // <--- fixed here
+          },
+        }
+      );
 
       const data = await response.json();
       console.log("tasks data from readAsignTasks", data);
