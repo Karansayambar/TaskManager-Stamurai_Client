@@ -14,8 +14,9 @@ interface TodoData {
   priority: string;
   assignedTo: string;
 }
-const url = "https://taskmanager-stamurai-server-1.onrender.com";
-// const url = "http://localhost:8000";
+
+// const url = "https://taskmanager-stamurai-server-1.onrender.com";
+const url = "http://localhost:8000";
 
 // export const getMyTasks = createAsyncThunk(
 //   "todo/getMyTasks",
