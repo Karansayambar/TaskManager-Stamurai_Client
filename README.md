@@ -64,8 +64,12 @@ There are multiple users
 user1@gmail.com
 user2@gmail.com
 user3@gmail.com
+
+password : 1234567890
+
 1 admin
 admin@gmail.com
+password : 1234567890
 
 Implemented Features
 User Roles
